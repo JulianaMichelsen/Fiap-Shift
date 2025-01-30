@@ -46,6 +46,7 @@ menu_livros = """
 tabela_autores = []
 tabela_categorias = []
 tabela_editoras = []
+tabela_livros = []
 
 while True:
     print(menu_principal)
@@ -146,6 +147,8 @@ while True:
                         editora = tabela_editoras[id]
                         print("Id | Nome | Endereço | Telefone")
                         print(f"{id} | {editora['nome']} | {editora['endereco']} | {editora['fone']}")
+                    case _:
+                        print('Opção Inválida!')  
 
         case '3':
             while True:
@@ -196,7 +199,59 @@ while True:
                         print("Id | Nome | Estilo | Pais | Bio")
                         print(f'{index} | {autor['nome']} | {autor['estilo']} | {autor['pais']} | {autor['bio']}')
                     case _:
-                        print('Opção Inválida!')                       
+                        print('Opção Inválida!')
+        case '4':
+            while True:
+                print(menu_livros)
+                opcao_livros = input("Digite a opção: ")
+                match opcao_livros:
+                    case '0':
+                        break
+                    case '1':
+                        if tabela_livros == []:
+                            print('Nenhum livro cadastrado.')
+                            input('Pressione <ENTER> para continuar.')
+                            continue
+                        print('Id | Título | Ano | Qtde páginas | ISBN | autor | categoria | editora')
+                        for index, livro in enumerate(tabela_livros):
+                            print(f"{index} | {livro['titulo']} | {livro['ano']} | {livro['paginas']} | {livro['isbn']} | {livro['autor']} | {livro['categoria']} | {livro['editora']}")
+                    case '2':
+                        if tabela_autores == [] or tabela_categorias == [] or tabela_editoras == []:
+                            print('Necessário cadastrar pelo menos um autor, uma categoria, e uma editora.')
+                            continue
+
+                        titulo = input('Digite o título do livro: ')
+                        resumo = input('Digite o resumo do livro: ')
+                        ano = input('Digite o ano de publicação: ')
+                        paginas = input('Digite a quantidade de páginas: ')
+                        isbn = input('Digite o ISBN: ')
+                        autor = input('Digite o Id do autor: ')
+                        categoria = input('Digite o Id da categoria: ')
+                        editora = input('Digete o Id da editora: ')
+                        novo_livro = {
+                            'titulo': titulo,
+                            'resumo': resumo,
+                            'ano': ano,
+                            'paginas': paginas,
+                            'isbn': isbn,
+                            'autor': autor,
+                            'categoria': categoria,
+                            'editora': editora
+                        }
+                        tabela_livros.append(novo_livro)
+                    case '3':
+                        if tabela_livros == []:
+                            print('Nenhum livro cadastrado.')
+                            input('Pressione <ENTER> para continuar.')
+                            continue
+                    case '4':
+                        if tabela_livros == []:
+                            print('Nenhum livro cadastrado.')
+                            input('Pressione <ENTER> para continuar.')
+                            continue
+                    case _:
+                        print('Opção Inválida!')            
+
         case _:
             print('Opção Inválida!')
 
