@@ -50,20 +50,70 @@ else:
 # Se o usuário digitar o número 5 mostrar uma mensagem de finalização e sair do programa.
 # Mostrar mensagem de erro se a opção escolhida não existir no menu e sair do programa.
 # Repare que a opção de número dois é de divisão. Se o denominador for zero o programa deverá 1) mostrar uma mensagem de erro e depois 2) sair do programa.
-
-num1 = int(input("Digite o primeiro número inteiro"))
-num2 = int(input("Digite o segundo número inteiro"))
-
 menu = """
 [Menu] Escolha uma das seguintes opções:
-'1 - Adição
-'2 - Multiplicação
-'3 - Subtração
-'0 - Sair do programa
+1 - Adição
+2 - Divisão
+3 - Multiplicação
+4 - Subtração
+0 - Sair do programa
 """
 
- 
+while True:
+    print("Escolha dois números inteiros!")
+    num1 = int(input("Digite o primeiro número inteiro: "))
+    num2 = int(input("Digite o segundo número inteiro: "))
+
+    print(menu)
+    print()
+    opcao = input('Digite a opção: ')
+    match opcao:
+        case '0':
+            break
+        case '1':
+            adicao = (num1+num2)
+            print("Você escolheu adição.")
+            print(f"O resultado da adição. é {adicao}")
+
+        case '2':
+            if num1 == 0 or num2 == 0:
+                print("Não é possível realizar divisão por 0!")
+                break
+            else:
+                divisao = (num1 / num2)
+                print("Você escolheu divisão.")
+                print(f"O resultado da divisão. é {divisao}")
+
+        case '3':
+            multiplicacao = (num1 * num2)
+            print("Você escolheu multiplicação.")
+            print(f"O resultado da amultiplicação. é {multiplicacao}")
+
+        case '4':
+            subtracao = (num1-num2)
+            print("Você escolheu subtração.")
+            print(f"O resultado da subtração. é {subtracao}")
+
+        case _:
+            print("Número inválido")
+            break
+print("Programa encerrado!")
+
+
+
+        
+    
 # Aula 03, Exercício 04
 
 # Entrar com dois números inteiros via teclado, onde o segundo deverá ser maior que o primeiro. Repetir a operação de leitura do segundo número enquanto a regra não for respeitada.
- 
+
+while True: 
+    num1 = int(input("Digite um número inteiro: "))
+    num2 = int(input("Digite um número maior que o primeiro: "))
+    if num1 >= num2:
+        num2 = int(input("Digite um número maior que o primeiro"))
+    else:
+        print("Parabéns!")
+        break
+
+
