@@ -105,3 +105,51 @@ emails_teste = [
 
 for email in emails_teste:
     print(f"{email}: {validar_email(email)}")
+
+"""
+Escreva uma função que aceite uma string como
+parâmetro e retorne o seu inverso (de trás pra frente)
+"""
+S = 'abcdefg'
+resultado = []
+
+tamanho = len(S)
+
+for index in range(tamanho-1, 0, -1):
+    letra = S[index-1]
+    print(letra)
+    resultado.append(letra)
+    tamanho =-1
+
+print(resultado)
+print(''.join(resultado))
+
+# outra maneira de resolver
+
+mensagem = 'sorocaba'
+print(mensagem[9:0:-1])
+
+"""
+Escreva uma função para identificar palindromos
+"""
+
+def is_palindromo(msg: str) -> bool:
+    s = list(msg)
+    lista = []
+    for letra in s:
+        if letra.isalnum():
+            lista.append(letra.lower())
+
+    temp = ''.join(lista)
+    inverso = temp[::-1]
+    return temp == inverso
+
+s1 = "Anotaram a data da maratona"
+s2 = "ana"
+s3 = "Ana"
+s4 = "Anotaram a data de maratona"
+
+print(f'{s1} é palíndromo? {is_palindromo(s1)}')
+print(f'{s2} é palíndromo? {is_palindromo(s2)}')
+print(f'{s3} é palíndromo? {is_palindromo(s3)}')
+print(f'{s4} é palíndromo? {is_palindromo(s4)}')
