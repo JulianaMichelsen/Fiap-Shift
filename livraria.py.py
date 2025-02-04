@@ -47,7 +47,6 @@ tabela_categorias = []
 tabela_editoras = []
 tabela_livros = []
 
-
 def gerencia_categoria():
     print(menu_categorias)
     opcao_categorias = input ("Digite a opção: ")
