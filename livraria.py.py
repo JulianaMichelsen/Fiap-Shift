@@ -42,10 +42,20 @@ menu_livros = """
 0 - Voltar ao menu anterior
 """
 
+
 tabela_autores = []
 tabela_categorias = []
 tabela_editoras = []
 tabela_livros = []
+
+
+def valida_email(email: str) -> bool:
+    email = email.lower()
+    if email.find('@') >=0 and email.endswith('.com'):
+        return True
+    
+    return False
+
 
 def gerencia_categoria():
     print(menu_categorias)
@@ -162,57 +172,80 @@ def gerencia_editora():
 def gerencia_autor():
     print(menu_autores)
     opcao_autores = input('Digite a opção: ')
-    match opcao_autores:    
+    match opcao_autores:
         case '0':
-            return
-        case "1":
+            return  # encerra a execução desta função e retorna para onde foi chamada.
+        case '1':
             if tabela_autores == []:
                 print("Nenhum Autor cadastrado.")
                 input("Pressione <ENTER> para continuar.")
             else:
-                print("Id | Nome | Estilo | Pais | Bio")
+                print('Id | Nome | Email | Telefone | Biografia')
                 for index, autor in enumerate(tabela_autores):
-                    print(f'{index} | {autor['nome']} | {autor['estilo']} | {autor['pais']} | {autor['bio']}')
-        case "2":
-            nome_autor = input("Digite o nome do autor: ")
-            estilo_autor = input("Digite o estilo do autor: ")
-            pais_autor = input("Digite o país do autor: ")
-            bio_autor = input("Digite a biografia do autor: ")
+                    print(f'{index} | {autor['nome']} | {autor['email']} | {autor['fone']} | {autor['biografia']}')
+        case '2':
+            nome_autor = input('Digite o nome do autor: ')
+            email_autor = input('Digite o email do autor: ')
+            while not valida_email(email_autor):
+                print('E-mail inválido! Tente novamente.')
+                email_autor = input('Digite o email do autor: ')
+
+            fone_autor = input('Digite o telefone do autor: ')
+            bio_autor = input('Digite a biografia do autor: ')
             novo_autor = {
                 'nome': nome_autor,
-                'estilo': estilo_autor,
-                'pais': pais_autor,
-                'bio' : bio_autor
+                'email': email_autor,
+                'fone': fone_autor,
+                'biografia': bio_autor
             }
             tabela_autores.append(novo_autor)
-            print("Autor adicionado com sucesso!")
+            print('Autor adicionado com sucesso!')
         case '3':
             if tabela_autores == []:
-                print("Nenhum autor cadastrado.")
+                print("Nenhum Autor cadastrado.")
                 input("Pressione <ENTER> para continuar.")
             else:
-                try:                    
-                    id = input('Digite o id do Autor a ser excluido')
+                try:
+                    id = input('Digite o ID do autor a ser excluido: ')
                     id = int(id)
                     tabela_autores.pop(id)
                 except:
-                    print(f'Id do Autor "{id}" inválido.')
+                    print(f'Id do autor "{id}" inválido.')
 
                 print('Autor excluído com sucesso!')
         case '4':
             if tabela_autores == []:
-                print("Nenhum autor cadastrado.")
+                print("Nenhum Autor cadastrado.")
                 input("Pressione <ENTER> para continuar.")
             else:
                 try:
-                    id = input('Digite o ID do autor para buscar: ')
+                    id = input('Digite o ID do autor a ser excluido: ')
                     id = int(id)
                     autor = tabela_autores[id]
-                    print("Id | Nome | Estilo | Pais | Bio")
-                    print(f'{index} | {autor['nome']} | {autor['estilo']} | {autor['pais']} | {autor['bio']}')
+                    print('Id | Nome | Email | Telefone | Biografia')
+                    print(f'{id} | {autor['nome']} | {autor['email']} | {autor['fone']} | {autor['biografia']}')
                 except:
-                    print(f'Id do Autor "{id}" inválido.')
+                    print(f'Id do autor "{id}" inválido.')
 
+        case '5':
+            if tabela_autores == []:
+                print("Nenhum Autor cadastrado.")
+                input("Pressione <ENTER> para continuar.")
+            else:
+                id = int(input('Digite o ID do autor a ser editado: '))
+                autor = tabela_autores[id]
+                nome_autor = input(f"Digite o novo nome do autor ({autor['nome']}): ")
+                email_autor = input(f"Digite o email do autor: ({autor['email']}): ")
+                fone_autor = input(f"Digite o telefone do autor: ({autor['fone']}): ")
+                bio_autor = input(f"Digite a biografia do autor: ({autor['biografia']}): ")
+                novo_autor = {
+                    'nome': nome_autor,
+                    'email': email_autor,
+                    # 'fone': fone_autor,
+                    # 'biografia': bio_autor
+                }
+                tabela_autores[id] = novo_autor
+                print('Autor editado com sucesso!')
         case _:
             print('Opção Inválida!')
 
