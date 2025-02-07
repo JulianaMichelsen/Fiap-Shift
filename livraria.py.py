@@ -69,6 +69,12 @@ class Autor:
         self.fone = fone
         self.biografia = biografia
 
+    def __str__(self):
+        return f'{self.id} | {self.nome} | {self.email} | {self.fone} | {self.biografia}'
+
+    def __repr__(self):
+        return f'{self.nome} | {self.email} | {self.fone} | {self.biografia}'
+
     @property
     def id(self):
         return self.__id
